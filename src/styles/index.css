@@ -1,0 +1,142 @@
+@import 'material-symbols/outlined.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-background text-on-surface font-body-md;
+    @apply selection:bg-primary-container selection:text-on-primary-container;
+  }
+
+  /* Garante um espaçamento de rolagem perfeito abaixo do cabeçalho fixo */
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@layer components {
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+
+  .code-pattern {
+    background-image: radial-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .soft-glow {
+    box-shadow: 0 0 60px -15px rgba(0, 240, 255, 0.15);
+  }
+
+  /* Animação suave e glow nos títulos interativos de cada seção */
+  .interactive-title {
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.3s ease;
+    display: inline-block;
+  }
+  .interactive-title:hover {
+    transform: translateY(-2px) scale(1.01);
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  }
+  .interactive-title:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  /* Efeitos Premium de Hover para Cards */
+  .card-hover {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .card-hover:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.2);
+    border-color: rgba(0, 240, 255, 0.4);
+  }
+
+  /* Glassmorphism Refinado */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Botões com brilho pulsante */
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-glow::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.4s ease-out;
+  }
+  .btn-glow:hover::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Ícones Flutuantes e brilhantes */
+  .icon-float {
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  .group:hover .icon-float {
+    transform: translateY(-3px) scale(1.1);
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+
+  /* Imagens reveladoras (Zoom suave na foto) */
+  .img-reveal {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .group:hover .img-reveal {
+    transform: scale(1.05);
+  }
+}
+
+/* Entrada Suave (Fade In Up) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
