@@ -9,7 +9,7 @@ import { getSiteContent } from '@/app/admin/settings/actions';
 
 import { formatWhatsappUrl, formatEmailUrl } from '@/utils/formatContact';
 
-export const revalidate = 0; // Garantir que atualizações no admin apareçam instantaneamente
+export const dynamic = 'force-dynamic'; // Garantir que atualizações no admin apareçam instantaneamente
 
 export default async function Home() {
   // Buscar dados do banco PostgreSQL

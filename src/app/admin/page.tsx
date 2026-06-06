@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { prisma } from '@/lib/db';
 
-export const revalidate = 0; // Garantir dados atualizados em tempo real
+export const dynamic = 'force-dynamic'; // Garantir dados atualizados em tempo real
 
 export default async function AdminDashboardPage() {
   // 1. Buscar métricas do banco PostgreSQL

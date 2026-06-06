@@ -1,6 +1,8 @@
 import { getSiteContent } from './actions';
 import { SettingsClient } from './SettingsClient';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Configurações do Site - Admin',
 };
