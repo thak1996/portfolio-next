@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: portfolio-postgres-prod
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword # Se desejar, troque para ${DB_PASSWORD} e defina no Coolify
+      POSTGRES_DB: portfolio_db
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+    networks:
+      - portfolio-network
+
+  migration:
+    build:
+      context: .
+      target: builder 
+    container_name: portfolio-migration-prod
+    environment:
+      DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/portfolio_db?schema=public
+    depends_on:
+      db:
+        condition: service_started
+    networks:
+      - portfolio-network
+    command: sh -c "sleep 5 && npx prisma migrate deploy && npx prisma db seed"
+
+  web:
+    build:
+      context: .
+      target: runner
+    container_name: portfolio-web-prod
+    restart: always
+    expose:
+      - "3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/portfolio_db?schema=public
+      JWT_SECRET: ${JWT_SECRET:-chave_super_secreta_producao_123}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-dev@franklyndev.com.br}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin@123}
+    volumes:
+      - portfolio_uploads_prod:/app/public/uploads
+    depends_on:
+      migration:
+        condition: service_completed_successfully
+    networks:
+      - portfolio-network
+
+volumes:
+  postgres_data_prod:
+  portfolio_uploads_prod:
+
+networks:
+  portfolio-network:
+    driver: bridge

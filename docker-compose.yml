@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: portfolio-postgres-dev
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: portfolio_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    networks:
+      - portfolio-network
+
+  dev:
+    build:
+      context: .
+      target: builder # Compila até o estágio builder que possui as ferramentas de dev
+    container_name: portfolio-dev
+    command: sh -c "sleep 3 && npx prisma migrate dev && npm run dev"
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/portfolio_db?schema=public
+      JWT_SECRET: super-secret-key-change-this-in-production-12345678
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: adminpassword123
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      WATCHPACK_POLLING: "true" # Ajuda o hot-reload no Docker
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+      - portfolio_uploads_dev:/app/public/uploads
+    depends_on:
+      db:
+        condition: service_started
+    networks:
+      - portfolio-network
+
+volumes:
+  postgres_data_dev:
+  portfolio_uploads_dev:
+
+networks:
+  portfolio-network:
+    driver: bridge
