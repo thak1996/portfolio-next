@@ -1,0 +1,15 @@
+model Lead {
+  id        String     @id @default(uuid())
+  name      String
+  email     String
+  message   String
+  status    LeadStatus @default(NEW)
+  createdAt DateTime   @default(now())
+}
+
+enum LeadStatus {
+  NEW
+  READ
+  CONTACTED
+  ARCHIVED
+}

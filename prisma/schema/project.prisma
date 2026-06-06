@@ -1,0 +1,12 @@
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  imageUrl    String
+  tags        String[] // PostgreSQL natively supports dynamic string arrays!
+  detailsLink String   @default("#")
+  githubLink  String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

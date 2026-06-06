@@ -1,0 +1,33 @@
+model SiteContent {
+  id              String   @id @default("global")
+
+  // Section Control
+  showHero      Boolean  @default(true)
+  showAbout     Boolean  @default(true)
+  showSkills    Boolean  @default(true)
+  showProjects  Boolean  @default(true)
+  showWhyHireMe Boolean  @default(true)
+  showContact   Boolean  @default(true)
+  sectionOrder  String[] @default(["hero", "about", "skills", "projects", "whyHireMe", "contact"])
+
+  heroBadge       String
+  heroTitle       String
+  heroSubtitle    String
+  heroDescription String
+  heroTerminalText String?
+  heroPhotoUrl    String?
+  resumeUrl       String?
+
+  learningText    String?
+
+  aboutText       String
+
+  contactEmail    String
+  contactWhatsapp String?
+  contactLinkedin String?
+  contactGithub   String?
+
+  footerText      String
+
+  updatedAt       DateTime @updatedAt
+}
