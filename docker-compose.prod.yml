@@ -26,7 +26,7 @@ services:
         condition: service_started
     networks:
       - portfolio-network
-    command: sh -c "sleep 15 && npx prisma migrate deploy && npx prisma db seed"
+    command: sh -c "sleep 15 && npx prisma migrate deploy"
 
   web:
     build:
