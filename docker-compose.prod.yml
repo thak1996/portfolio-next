@@ -17,11 +17,11 @@ services:
     volumes:
       - portfolio_uploads_prod:/app/public/uploads
     networks:
-      - portfolio-network
+      - coolify
 
 volumes:
   portfolio_uploads_prod:
 
 networks:
-  portfolio-network:
-    driver: bridge
+  coolify:
+    external: true
