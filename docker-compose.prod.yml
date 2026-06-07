@@ -21,6 +21,7 @@ services:
     container_name: portfolio-migration-prod
     environment:
       DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/portfolio_db?schema=public
+      PRISMA_TELEMETRY_DISABLED: 1
     depends_on:
       db:
         condition: service_started
