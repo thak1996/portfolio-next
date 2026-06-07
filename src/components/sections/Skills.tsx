@@ -44,21 +44,45 @@ export function Skills({ dbSkills, learningText }: SkillsProps) {
           {skillsList.map((skill) => (
             <div 
               key={skill.id} 
-              className="bg-surface border border-white/5 p-md rounded-xl hover:border-primary/30 transition-colors group flex flex-col justify-center items-center text-center shadow-lg hover:shadow-primary/5 active:scale-95"
+              className="bg-surface border border-white/5 p-md md:p-lg rounded-2xl hover:border-primary/30 transition-all duration-300 group flex flex-col justify-start items-start text-left shadow-lg hover:shadow-primary/5 active:scale-[0.98] hover:-translate-y-1 relative overflow-hidden"
             >
-              <div className="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center mb-sm group-hover:bg-primary/10 transition-colors">
-                <span className="material-symbols-outlined text-primary text-[24px]">
-                  {skill.category === 'Frontend' ? 'web' : 
-                   skill.category === 'Backend' ? 'dns' : 
-                   skill.category === 'Database' ? 'database' : 
-                   skill.category === 'Mobile' ? 'smartphone' : 'code'}
-                </span>
+              {/* Background Glow */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-10 -mt-10 group-hover:bg-primary/10 transition-colors"></div>
+
+              <div className="flex items-center gap-sm mb-md w-full">
+                <div className="w-12 h-12 bg-surface-container-high rounded-xl flex items-center justify-center group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300 shadow-inner">
+                  <span className="material-symbols-outlined text-primary text-[24px]">
+                    {skill.icon || (
+                      skill.category === 'Frontend' ? 'web' : 
+                      skill.category === 'Backend' ? 'dns' : 
+                      skill.category === 'Database' ? 'database' : 
+                      skill.category === 'Mobile' ? 'smartphone' : 'code'
+                    )}
+                  </span>
+                </div>
+                <h3 className="font-bold text-lg text-on-surface group-hover:text-primary transition-colors">{skill.title}</h3>
               </div>
-              <h3 className="font-bold text-on-surface mb-xs group-hover:text-primary transition-colors">{skill.title}</h3>
-              <div className="w-full bg-surface-container-highest rounded-full h-1.5 mt-auto overflow-hidden">
+
+              {skill.description && (
+                <p className="text-on-surface-variant text-sm mb-md line-clamp-3">
+                  {skill.description}
+                </p>
+              )}
+
+              {skill.tags && skill.tags.length > 0 && (
+                <div className="flex flex-wrap gap-xs mb-md mt-auto">
+                  {skill.tags.map(tag => (
+                    <span key={tag} className="text-[10px] md:text-xs font-bold px-2 py-1 rounded-md bg-white/5 text-on-surface-variant group-hover:bg-primary/10 group-hover:text-primary transition-colors border border-white/5">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <div className="w-full bg-surface-container-highest rounded-full h-1 mt-auto overflow-hidden">
                 <div 
-                  className="bg-gradient-to-r from-primary to-secondary h-1.5 rounded-full opacity-70 group-hover:opacity-100 transition-opacity" 
-                  style={{ width: skill.level }}
+                  className="bg-gradient-to-r from-primary to-secondary h-full rounded-full opacity-70 group-hover:opacity-100 transition-opacity" 
+                  style={{ width: skill.level || '100%' }}
                 ></div>
               </div>
             </div>
