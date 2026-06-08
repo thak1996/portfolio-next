@@ -31,7 +31,7 @@ export async function Hero() {
             )}
             
             {content.resumeUrl && (
-              <div className="mt-xl flex flex-wrap gap-4 justify-center md:justify-start">
+              <div className="mt-8 md:mt-xl flex flex-wrap gap-4 justify-center md:justify-start">
                 <a
                   href={content.resumeUrl}
                   target="_blank"

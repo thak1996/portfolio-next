@@ -33,7 +33,7 @@ export function Skills({ dbSkills, learningText }: SkillsProps) {
   return (
     <section className="py-lg md:py-xl" id="skills">
       <div className="max-w-container-max mx-auto px-gutter">
-        <div className="text-center mb-xl">
+        <div className="text-center mb-10 md:mb-xl">
           <SectionTitle title="Habilidades & Stack" target="skills" className="mb-sm" />
           <p className="text-on-surface-variant font-body-md max-w-2xl mx-auto">
             Tecnologias que utilizo no dia a dia para construir produtos sólidos e escaláveis.

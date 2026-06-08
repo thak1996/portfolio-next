@@ -60,7 +60,7 @@ export function Projects({ dbProjects }: ProjectsProps) {
   return (
     <section className="py-lg md:py-xl bg-surface-container-low" id="projects">
       <div className="max-w-container-max mx-auto px-gutter">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-xl gap-md">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-xl gap-md">
           <div>
             <SectionTitle title="Projetos em Destaque" target="projects" className="mb-sm" />
             <p className="text-on-surface-variant">Sistemas reais entregues de ponta a ponta</p>
