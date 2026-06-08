@@ -1,10 +1,10 @@
 model Skill {
   id          String   @id @default(uuid())
   title       String
-  category    String   // e.g. 'Mobile', 'Web Frontend', 'Backend', 'Infra & Deploy'
+  category    String // e.g. 'Mobile', 'Web Frontend', 'Backend', 'Infra & Deploy'
   description String
   tags        String[]
-  icon        String   // Material symbol name, e.g. 'smartphone', 'language', 'database', 'terminal'
+  icon        String // Material symbol name, e.g. 'smartphone', 'language', 'database', 'terminal'
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
